@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "seed": 42,
+    "generated_at": "2026-09-25T07:47:05.000949+00:00",
+    "rows_before": 24,
+    "rows_after": 22,
+    "corruption_types": [
+      "drop_latest_records",
+      "blank_summary",
+      "inject_noise",
+      "truncate_title",
+      "stale_date",
+      "duplicate_rows"
+    ]
+  },
+  "events": [
+    {
+      "corruption_type": "drop_latest_records",
+      "description": "Dropped the 5 most recently published records (20%).",
+      "params": {
+        "ratio": 0.2
+      },
+      "affected_count": 5,
+      "affected_paper_ids": [
+        "10.1145/3637528.3671812",
+        "10.1145/3637528.3671808",
+        "10.1145/3637528.3671804",
+        "10.1145/3637528.3671807",
+        "10.1145/3637528.3671802"
+      ]
+    },
+    {
+      "corruption_type": "blank_summary",
+      "description": "Replaced the summary with an empty string.",
+      "params": {
+        "rows": 3
+      },
+      "affected_count": 3,
+      "affected_paper_ids": [
+        "10.1145/3637528.3671824",
+        "10.1145/3637528.3671821",
+        "10.1145/3637528.3671817"
+      ]
+    },
+    {
+      "corruption_type": "inject_noise",
+      "description": "Prepended garbage symbols to the summary.",
+      "params": {
+        "rows": 3,
+        "noise_prefix": "@@## %%&& ~~** ||^^ zqx#@! lorem#$%"
+      },
+      "affected_count": 3,
+      "affected_paper_ids": [
+        "10.1145/3637528.3671810",
+        "10.1145/3637528.3671820",
+        "10.1145/3637528.3671815"
+      ]
+    },
+    {
+      "corruption_type": "truncate_title",
+      "description": "Truncated the title to 6 characters.",
+      "params": {
+        "rows": 3,
+        "max_chars": 6
+      },
+      "affected_count": 3,
+      "affected_paper_ids": [
+        "10.1145/3637528.3671822",
+        "10.1145/3637528.3671809",
+        "10.1145/3637528.3671803"
+      ]
+    },
+    {
+      "corruption_type": "stale_date",
+      "description": "Shifted the published date 365 days into the past.",
+      "params": {
+        "ratio": 0.3,
+        "shift_days": 365
+      },
+      "affected_count": 6,
+      "affected_paper_ids": [
+        "10.1145/3637528.3671823",
+        "10.1145/3637528.3671819",
+        "10.1145/3637528.3671813",
+        "10.1145/3637528.3671801",
+        "10.1145/3637528.3671811",
+        "10.1145/3637528.3671806"
+      ]
+    },
+    {
+      "corruption_type": "duplicate_rows",
+      "description": "Appended exact copies of existing rows.",
+      "params": {
+        "rows": 3
+      },
+      "affected_count": 3,
+      "affected_paper_ids": [
+        "10.1145/3637528.3671819",
+        "10.1145/3637528.3671818",
+        "10.1145/3637528.3671809"
+      ]
+    }
+  ]
+}

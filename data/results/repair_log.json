@@ -1,0 +1,18 @@
+{
+  "decided_at": "2026-09-25T07:47:04.997254+00:00",
+  "triggered": true,
+  "reasons": [
+    "expect_column_values_to_be_unique(paper_id)",
+    "expect_column_value_lengths_to_be_between(title)",
+    "expect_column_value_lengths_to_be_between(summary)",
+    "expect_column_values_to_not_match_regex(summary)",
+    "FreshnessSLA(stale_ratio=0.3636 > 0.25)"
+  ],
+  "source": "data/raw/crossref_records.json",
+  "procedure": "load_raw_records -> build_clean_dataframe -> GX quality gate (must pass) -> rebuild Chroma `papers-repaired` -> evaluate on the same test_set.json",
+  "repaired_quality_success": true,
+  "repaired_is_fresh": true,
+  "baseline_content_hash": "a0a868e2e56a7a8d607cb70e093d0b8691b1e80aea895078158774dd5e9401d1",
+  "repaired_content_hash": "a0a868e2e56a7a8d607cb70e093d0b8691b1e80aea895078158774dd5e9401d1",
+  "repaired_matches_baseline": true
+}
