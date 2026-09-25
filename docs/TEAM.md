@@ -1,6 +1,6 @@
 # Danh Sách Thành Viên & Báo Cáo Phân Công Nhóm
 
-- **Tên Nhóm:** `NguyenVuHuy` (làm cá nhân — 1 thành viên)
+- **Tên Nhóm:** `Softmax` (1 thành viên)
 - **Mã Nhóm / Lớp:** `K4-L3-DAY10`
 - **Tên Repository Nộp Bài:** `https://github.com/vuhuyng04/K4-L3A-Day10-Data-Pipeline-Data-Observability`
 

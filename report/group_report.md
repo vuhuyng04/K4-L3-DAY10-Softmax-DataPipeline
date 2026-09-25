@@ -5,7 +5,7 @@
 | Thông tin | Nội dung |
 | --- | --- |
 | Khóa/Lớp | K4 — `K4-L3-DAY10` |
-| Tên nhóm | NguyenVuHuy (làm cá nhân) |
+| Tên nhóm | Softmax (1 thành viên) |
 | Repository | https://github.com/vuhuyng04/K4-L3A-Day10-Data-Pipeline-Data-Observability |
 | Ngày hoàn thành | 2026-09-25 |
 
