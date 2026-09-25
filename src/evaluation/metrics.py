@@ -18,6 +18,9 @@ from retrieval.llm import build_llm
 from retrieval.qa import answer_question
 
 
+FALLBACK_JUDGE_REASONING = "Fallback heuristic judge used because the LLM evaluator was unavailable."
+
+
 class JudgeVerdict(BaseModel):
     score: int = Field(ge=1, le=5)
     correct: bool
@@ -66,8 +69,21 @@ Return:
         return JudgeVerdict(
             score=score,
             correct=score >= 3,
-            reasoning="Fallback heuristic judge used because the LLM evaluator was unavailable.",
+            reasoning=FALLBACK_JUDGE_REASONING,
         )
+
+
+def _summarize_by_question_type(answers: list[dict[str, Any]]) -> dict[str, dict[str, float]]:
+    breakdown: dict[str, dict[str, float]] = {}
+    for question_type in sorted({item["question_type"] for item in answers}):
+        items = [item for item in answers if item["question_type"] == question_type]
+        breakdown[question_type] = {
+            "samples": len(items),
+            "retrieval_hit_rate": mean(1.0 if item["retrieval_hit"] else 0.0 for item in items),
+            "mean_token_f1": mean(item["token_f1"] for item in items),
+            "judge_accuracy": mean(1.0 if item["judge"]["correct"] else 0.0 for item in items),
+        }
+    return breakdown
 
 
 def _run_ragas(settings: Settings, answers: list[dict[str, Any]]) -> dict[str, Any]:
@@ -136,6 +152,8 @@ def evaluate_pipeline(
         "mean_token_f1": mean(item["token_f1"] for item in answers),
         "judge_accuracy": mean(1.0 if item["judge"]["correct"] else 0.0 for item in answers),
         "mean_judge_score": mean(item["judge"]["score"] for item in answers),
+        "judge_fallback_count": sum(1 for item in answers if item["judge"]["reasoning"] == FALLBACK_JUDGE_REASONING),
+        "by_question_type": _summarize_by_question_type(answers),
     }
     summary["ragas"] = _run_ragas(settings, answers)
 

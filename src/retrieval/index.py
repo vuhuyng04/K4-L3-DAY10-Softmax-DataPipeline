@@ -45,25 +45,35 @@ class LocalEmbeddingIndex:
         records = df.to_dict(orient="records")
         documents: list[dict[str, Any]] = []
         for index, row in enumerate(records):
+            # Chroma metadata khong chap nhan None -> ep ve chuoi rong.
+            text = {key: "" if row.get(key) is None else str(row[key]) for key in row if not isinstance(row[key], list)}
             documents.append(
                 {
-                    "record_id": f"{row['paper_id']}::{index}",
-                    "paper_id": row["paper_id"],
-                    "title": row["title"],
-                    "content": row["text_for_embedding"],
+                    "record_id": f"{text['paper_id']}::{index}",
+                    "paper_id": text["paper_id"],
+                    "title": text["title"],
+                    "content": text["text_for_embedding"],
                     "metadata": {
-                        "paper_id": row["paper_id"],
-                        "title": row["title"],
-                        "published": row["published"],
-                        "authors_joined": row["authors_joined"],
-                        "categories_joined": row["categories_joined"],
-                        "summary": row["summary"],
-                        "abs_url": row["abs_url"],
-                        "pdf_url": row["pdf_url"],
+                        "paper_id": text["paper_id"],
+                        "title": text["title"],
+                        "published": text["published"],
+                        "authors_joined": text["authors_joined"],
+                        "categories_joined": text["categories_joined"],
+                        "summary": text["summary"],
+                        "abs_url": text.get("abs_url", ""),
+                        "pdf_url": text.get("pdf_url", ""),
                     },
                 }
             )
         return documents
+
+    @staticmethod
+    def _portable_path(path: Path, settings: Settings) -> str:
+        """Luu duong dan tuong doi voi project de manifest khong chua path tuyet doi cua may local."""
+        try:
+            return path.resolve().relative_to(settings.paths.project_dir.resolve()).as_posix()
+        except ValueError:
+            return path.as_posix()
 
     @staticmethod
     def _derive_collection_name(settings: Settings, embeddings_output_path: Path | None) -> str:
@@ -116,7 +126,7 @@ class LocalEmbeddingIndex:
             {
                 "backend": "chroma",
                 "embedding_model": settings.embedding_model,
-                "persist_path": str(persist_path),
+                "persist_path": cls._portable_path(persist_path, settings),
                 "collection_name": collection_name,
                 "documents": documents,
             },
@@ -131,11 +141,14 @@ class LocalEmbeddingIndex:
     @classmethod
     def load(cls, settings: Settings, embeddings_path: Path | None = None) -> "LocalEmbeddingIndex":
         payload = read_json(embeddings_path or settings.paths.embeddings_json)
+        persist_path = Path(payload["persist_path"])
+        if not persist_path.is_absolute():
+            persist_path = settings.paths.project_dir / persist_path
         return cls(
             settings=settings,
             collection_name=payload["collection_name"],
             documents=payload["documents"],
-            persist_path=Path(payload["persist_path"]),
+            persist_path=persist_path,
         )
 
     def search(self, query: str, top_k: int | None = None) -> list[SearchResult]:
