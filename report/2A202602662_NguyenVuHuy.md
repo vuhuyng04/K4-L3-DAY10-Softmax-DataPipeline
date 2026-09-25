@@ -9,7 +9,7 @@
 | Khóa/Lớp | K4 — `K4-L3-DAY10` |
 | Tên nhóm | Softmax (1 thành viên) |
 | Vai trò chính | Thành viên duy nhất: source, cleaning, observability, corruption & integration |
-| Repository | https://github.com/vuhuyng04/K4-L3A-Day10-Data-Pipeline-Data-Observability |
+| Repository | https://github.com/vuhuyng04/K4-L3-DAY10-Softmax-DataPipeline |
 | Ngày hoàn thành | 2026-09-25 |
 
 ## 2. Vai trò và phạm vi công việc

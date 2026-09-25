@@ -2,7 +2,7 @@
 
 - **Tên Nhóm:** `Softmax` (1 thành viên)
 - **Mã Nhóm / Lớp:** `K4-L3-DAY10`
-- **Tên Repository Nộp Bài:** `https://github.com/vuhuyng04/K4-L3A-Day10-Data-Pipeline-Data-Observability`
+- **Tên Repository Nộp Bài:** `K4-L3-DAY10-Softmax-DataPipeline` — https://github.com/vuhuyng04/K4-L3-DAY10-Softmax-DataPipeline
 
 ---
 

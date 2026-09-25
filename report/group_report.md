@@ -6,7 +6,7 @@
 | --- | --- |
 | Khóa/Lớp | K4 — `K4-L3-DAY10` |
 | Tên nhóm | Softmax (1 thành viên) |
-| Repository | https://github.com/vuhuyng04/K4-L3A-Day10-Data-Pipeline-Data-Observability |
+| Repository | https://github.com/vuhuyng04/K4-L3-DAY10-Softmax-DataPipeline |
 | Ngày hoàn thành | 2026-09-25 |
 
 ### Thành viên và phân công
