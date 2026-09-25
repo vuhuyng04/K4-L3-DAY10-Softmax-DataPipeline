@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import sys
+
 from pipelines.phase1 import main
 
 
 if __name__ == "__main__":
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     main()
