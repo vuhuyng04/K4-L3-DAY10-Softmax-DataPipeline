@@ -1,0 +1,4 @@
+# ChromaDB persist files la nhi phan: khong duoc chuyen doi line ending khi checkout.
+data/chroma/** binary
+*.bin binary
+*.sqlite3 binary
